@@ -84,7 +84,7 @@ function draw() {
 
             let state = grid[i][j];
 
-            // check for grid edges
+            // check for grid edges (ignore edges)
             if(i == 0 || i == cols - 1 || j == 0 || j == rows - 1) {
                 
                 next[i][j] = state;
