@@ -84,24 +84,16 @@ function draw() {
 
             let state = grid[i][j];
 
-            // check for grid edges
-            if(i == 0 || i == cols - 1 || j == 0 || j == rows - 1) {
-                
-                next[i][j] = state;
-            
-            } else {
-                
-                // count the live neighbors
-                let neighbors = countNeighbors(grid, i, j);
+            // count the live neighbors
+            let neighbors = countNeighbors(grid, i, j);
 
-                // rules check
-                if(state == 1 && (neighbors < 2 || neighbors > 3)) {
-                    next[i][j] = 0;
-                } else if(state == 0 && neighbors == 3) {
-                    next[i][j] = 1;
-                } else {
-                    next[i][j] = state;
-                }
+            // rules check
+            if(state == 1 && (neighbors < 2 || neighbors > 3)) {
+                next[i][j] = 0;
+            } else if(state == 0 && neighbors == 3) {
+                next[i][j] = 1;
+            } else {
+                next[i][j] = state;
             }
         }
     }
@@ -127,7 +119,9 @@ function countNeighbors(grid, x, y) {
 
     for(let i = -1; i < 2; i++) {
         for(let j = -1; j < 2; j++) {
-            count += grid[x + i][y + j];
+            let col = (x + i + cols) % cols;
+            let row = (y + j + rows) % rows;
+            count += grid[col][row];
         }
     }
 
